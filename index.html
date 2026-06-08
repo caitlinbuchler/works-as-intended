@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works As Intended</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:         #F8F7F2;
+  --bg-card:    #FFFFFF;
+  --text:       #1a1a18;
+  --text-muted: #5F5E5A;
+  --text-faint: #999890;
+  --accent:     #D85A30;
+  --accent-dk:  #712B13;
+  --accent-bg:  #FAECE7;
+  --border:     rgba(26,26,24,0.1);
+  --border-md:  rgba(26,26,24,0.18);
+  --ff-d: 'Fraunces', Georgia, serif;
+  --ff-b: 'DM Sans', system-ui, sans-serif;
+  --ff-m: 'JetBrains Mono', monospace;
+  --max: 1080px;
+  --gap: clamp(1.5rem, 5vw, 4rem);
+}
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--ff-b); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--ff-b); cursor: pointer; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(248,247,242,0.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--gap);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-brand { font-family: var(--ff-d); font-size: 17px; font-weight: 600; letter-spacing: -0.3px; }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.api-btn {
+  font-size: 12px; padding: 5px 13px;
+  border: 1px solid var(--border-md); border-radius: 6px;
+  background: transparent; color: var(--text-muted);
+  transition: all 0.2s; white-space: nowrap;
+}
+.api-btn:hover { background: var(--bg-card); color: var(--text); }
+.api-btn.active { border-color: #3B6D11; color: #3B6D11; }
+
+/* LAYOUT */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gap); }
+
+/* HERO */
+.hero { padding: clamp(5rem, 12vw, 9rem) var(--gap) clamp(4rem, 8vw, 7rem); max-width: var(--max); margin: 0 auto; }
+.hero-eye {
+  display: inline-block;
+  font-size: 11px; letter-spacing: 0.12em; font-weight: 500;
+  color: var(--accent); margin-bottom: 1.75rem;
+  border: 1px solid rgba(216,90,48,0.3); border-radius: 20px;
+  padding: 4px 12px;
+}
+.hero h1 {
+  font-family: var(--ff-d);
+  font-size: clamp(3.2rem, 8.5vw, 6.5rem);
+  font-weight: 700; line-height: 0.97; letter-spacing: -3px;
+  margin-bottom: 1.75rem; max-width: 12ch;
+}
+.hero-tag {
+  font-family: var(--ff-d); font-style: italic; font-weight: 400;
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  color: var(--accent); margin-bottom: 2rem;
+}
+.hero-body {
+  font-size: 1.05rem; color: var(--text-muted);
+  max-width: 50ch; line-height: 1.75; margin-bottom: 2.75rem;
+}
+.hero-cta {
+  display: inline-block; padding: 0.72rem 1.8rem;
+  background: var(--text); color: var(--bg);
+  border-radius: 5px; font-size: 14px; font-weight: 500;
+  letter-spacing: 0.02em; transition: opacity 0.2s;
+}
+.hero-cta:hover { opacity: 0.82; }
+
+/* HERO ANIMATION */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.hero-eye  { animation: fadeUp 0.55s ease both; animation-delay: 0.05s; }
+.hero h1   { animation: fadeUp 0.55s ease both; animation-delay: 0.15s; }
+.hero-tag  { animation: fadeUp 0.55s ease both; animation-delay: 0.25s; }
+.hero-body { animation: fadeUp 0.55s ease both; animation-delay: 0.35s; }
+.hero-cta  { animation: fadeUp 0.55s ease both; animation-delay: 0.45s; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); }
+
+/* SECTION HEADERS */
+.sec-head { margin-bottom: 3rem; }
+.sec-head h2 { font-family: var(--ff-d); font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 600; letter-spacing: -1px; margin-bottom: 0.5rem; line-height: 1.1; }
+.sec-head p { font-size: 1rem; color: var(--text-muted); }
+
+/* FEATURES */
+.features { padding: clamp(4rem, 8vw, 7rem) 0; }
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5px; background: var(--border-md);
+  border: 1px solid var(--border-md); border-radius: 14px;
+  overflow: hidden;
+}
+.feat-card { background: var(--bg-card); padding: 2.25rem; transition: background 0.2s; }
+.feat-card:hover { background: #FDFCF8; }
+.feat-num { font-family: var(--ff-m); font-size: 11px; color: var(--text-faint); margin-bottom: 0.9rem; }
+.feat-name { font-family: var(--ff-d); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.45rem; letter-spacing: -0.25px; }
+.feat-wry { font-family: var(--ff-d); font-style: italic; font-size: 13px; color: var(--accent); margin-bottom: 0.8rem; }
+.feat-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+/* TOOLKIT */
+.toolkit { padding: clamp(4rem, 8vw, 7rem) 0; background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* DEMO ITEMS */
+.demo { border: 1px solid var(--border-md); border-radius: 12px; overflow: hidden; margin-bottom: 1.1rem; background: var(--bg-card); }
+.demo-head {
+  padding: 1.6rem 2rem;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  cursor: pointer; transition: background 0.15s; user-select: none;
+}
+.demo-head:hover { background: var(--bg); }
+.demo-head-l { display: flex; gap: 1rem; align-items: flex-start; }
+.demo-num { font-family: var(--ff-m); font-size: 11px; color: var(--text-faint); margin-top: 3px; min-width: 20px; }
+.demo-title { font-family: var(--ff-d); font-size: 1.15rem; font-weight: 600; letter-spacing: -0.25px; margin-bottom: 0.2rem; }
+.demo-sub { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; max-width: 60ch; }
+.demo-arrow { font-size: 18px; color: var(--text-faint); transition: transform 0.25s; flex-shrink: 0; margin-top: 2px; }
+.demo-arrow.open { transform: rotate(45deg); }
+.demo-body { display: none; border-top: 1px solid var(--border); }
+.demo-body.open { display: block; }
+
+/* DEMO FORM */
+.demo-form { padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: flex; flex-direction: column; gap: 0.3rem; }
+.form-row label { font-size: 12px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.03em; }
+.form-row input, .form-row textarea, .form-row select {
+  font-family: var(--ff-b); font-size: 14px;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border-md); border-radius: 7px;
+  background: var(--bg); color: var(--text);
+  transition: border-color 0.15s;
+}
+.form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+  outline: none; border-color: var(--accent);
+}
+.form-row textarea { resize: vertical; min-height: 90px; line-height: 1.55; }
+.form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.run-btn {
+  align-self: flex-start; padding: 0.65rem 1.5rem;
+  background: var(--text); color: var(--bg);
+  border: none; border-radius: 7px;
+  font-size: 14px; font-weight: 500;
+  transition: opacity 0.2s;
+}
+.run-btn:hover { opacity: 0.8; }
+.run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* OUTPUT */
+.demo-out { padding: 1.5rem 2rem; border-top: 1px solid var(--border); background: var(--bg); display: none; }
+.demo-out.show { display: block; }
+.out-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.out-label { font-size: 11px; font-weight: 500; color: var(--text-faint); letter-spacing: 0.09em; text-transform: uppercase; }
+.copy-btn { font-size: 11px; padding: 4px 10px; border: 1px solid var(--border-md); border-radius: 5px; background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+.copy-btn:hover { background: var(--bg-card); color: var(--text); }
+.out-content {
+  font-family: var(--ff-m); font-size: 13px; line-height: 1.7;
+  color: var(--text); white-space: pre-wrap; word-break: break-word;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 9px; padding: 1.25rem 1.5rem;
+}
+.api-notice {
+  background: var(--accent-bg); border: 1px solid rgba(216,90,48,0.25);
+  border-radius: 7px; padding: 0.7rem 1rem;
+  font-size: 13px; color: var(--accent-dk); margin-bottom: 1rem;
+  display: none;
+}
+.api-notice.show { display: block; }
+.persona-card {
+  background: var(--accent-bg); border: 1px solid rgba(216,90,48,0.2);
+  border-radius: 8px; padding: 1rem 1.25rem; margin-top: 0.5rem;
+}
+.pc-name { font-family: var(--ff-d); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+.pc-role { font-size: 12px; color: var(--text-muted); margin-bottom: 0.65rem; line-height: 1.45; }
+.pc-quirk { font-size: 12px; color: var(--accent-dk); display: flex; gap: 7px; margin-bottom: 0.25rem; line-height: 1.4; }
+.pc-quirk::before { content: '⚡'; flex-shrink: 0; }
+.upload-zone {
+  border: 2px dashed var(--border-md); border-radius: 10px;
+  padding: 1.75rem; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: var(--bg); margin-top: 0.25rem;
+}
+.upload-zone:hover, .upload-zone.dragover { border-color: var(--accent); background: var(--accent-bg); }
+.upload-zone p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.upload-zone strong { color: var(--text); }
+.preview-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1rem; justify-content: center; }
+.preview-thumb { width: 90px; height: 60px; object-fit: cover; border-radius: 5px; border: 1px solid var(--border-md); }
+.upload-count { font-size: 12px; color: var(--accent-dk); font-weight: 500; margin-top: 0.6rem; }
+.team-sec { padding: clamp(4rem, 8vw, 7rem) 0; }
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.team-card { background: var(--bg-card); border: 1px solid var(--border-md); border-radius: 12px; padding: 1.75rem 2rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.2s; }
+.team-card:hover { background: #FDFCF8; }
+.team-mark { flex-shrink: 0; }
+.team-name { font-family: var(--ff-d); font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.15rem; letter-spacing: -0.2px; }
+.team-role { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 0.6rem; }
+.team-bio { font-size: 13px; color: var(--text-muted); line-height: 1.55; font-style: italic; font-family: var(--ff-d); }
+
+/* PHILOSOPHY */
+.philosophy { padding: clamp(5rem, 10vw, 9rem) 0; }
+.phil-inner { max-width: 660px; }
+.phil-inner h2 { font-family: var(--ff-d); font-size: clamp(1.75rem, 3.5vw, 2.6rem); font-weight: 600; letter-spacing: -0.6px; margin-bottom: 2.25rem; line-height: 1.15; }
+.phil-inner p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.3rem; }
+.phil-inner p:last-child { margin-bottom: 0; }
+.phil-inner strong { color: var(--text); font-weight: 500; }
+.phil-pull {
+  border-left: 3px solid var(--accent); margin: 2.5rem 0;
+  padding-left: 1.5rem;
+}
+.phil-pull p { font-family: var(--ff-d); font-style: italic; font-size: 1.2rem; color: var(--text); line-height: 1.55; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem var(--gap);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.foot-brand { font-family: var(--ff-d); font-size: 15px; font-weight: 600; }
+.foot-note { font-size: 12px; color: var(--text-faint); font-family: var(--ff-d); font-style: italic; }
+
+/* MODAL */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,26,24,0.45); z-index: 500;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: var(--bg-card); border-radius: 14px;
+  padding: 2rem; width: 100%; max-width: 420px;
+  border: 1px solid var(--border-md);
+  animation: fadeUp 0.2s ease both;
+}
+.modal h3 { font-family: var(--ff-d); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.4rem; }
+.modal p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.55; }
+.modal input {
+  width: 100%; font-family: var(--ff-m); font-size: 13px;
+  padding: 0.65rem 0.9rem; border: 1px solid var(--border-md);
+  border-radius: 7px; background: var(--bg); color: var(--text); margin-bottom: 1rem;
+}
+.modal input:focus { outline: none; border-color: var(--accent); }
+.modal-btns { display: flex; gap: 0.75rem; }
+.modal-save { padding: 0.62rem 1.3rem; background: var(--text); color: var(--bg); border: none; border-radius: 7px; font-size: 14px; font-weight: 500; cursor: pointer; transition: opacity 0.2s; }
+.modal-save:hover { opacity: 0.8; }
+.modal-cancel { padding: 0.62rem 1.3rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border-md); border-radius: 7px; font-size: 14px; cursor: pointer; }
+
+@media (max-width: 680px) {
+  .nav-links a { display: none; }
+  .form-2col { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .demo-head { padding: 1.25rem 1.25rem; }
+  .demo-form, .demo-out { padding: 1.25rem; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Works As Intended</span>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#team">Team</a>
+    <a href="#thinking">Thinking</a>
+    <button class="api-btn" id="apiBtn" onclick="openModal()">Configure API key</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eye">Product Solutions</span>
+  <h1>Works As Intended</h1>
+  <p class="hero-tag">It's not a bug, it's a feature.</p>
+  <p class="hero-body">A product solutions team in a large media organisation. We handle sustainment, own the admin, manage the complexity, and chase the answers. This is how we fixed it.</p>
+  <a href="#toolkit" class="hero-cta">See the toolkit →</a>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>We have identified several features.</h2>
+      <p>Some require creative workarounds.</p>
+    </div>
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-name">The full-stack admin experience</div>
+        <div class="feat-wry">"It keeps us across all our tools."</div>
+        <div class="feat-desc">One request. Three Smartsheets, a Jira ticket, and a ServiceNow change — all to be created, kept in sync, and updated throughout. None of them talk to each other. All of them need a person.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-num">02</div>
+        <div class="feat-name">Manual precision engineering</div>
+        <div class="feat-wry">"It builds attention to detail."</div>
+        <div class="feat-desc">Configuration documents: slower to write than to implement, requiring exact formatting, and one misplaced highlight from a very uncomfortable debrief. Ownership of any error is hotly contested.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-name">Ambient knowledge architecture</div>
+        <div class="feat-wry">"It encourages exploration."</div>
+        <div class="feat-desc">Confluence contains multitudes. Pages that once made sense. Links that once worked. A migration that definitely happened. Finding what you need requires either institutional memory or an appetite for broken links.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-name">Proactive stakeholder cultivation</div>
+        <div class="feat-wry">"It builds relationships."</div>
+        <div class="feat-desc">Chasing updates from teams with different definitions of urgency. Writing the same message four ways for four different audiences. Across a multinational where every stakeholder is a different context.</div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-num">05</div>
+        <div class="feat-name">Emergent roadmapping</div>
+        <div class="feat-wry">"It stays flexible."</div>
+        <div class="feat-desc">The roadmap exists somewhere between the product lead's head and the last executive decision. Planning is reactive. Priorities surface when they become urgent. Strategy is articulated when someone asks for it.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOOLKIT -->
+<section class="toolkit" id="toolkit">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The toolkit.</h2>
+      <p>Four things AI makes significantly less painful. Click a demo to try it — example outputs are pre-loaded, or <button onclick="openModal()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:1rem;padding:0;font-family:var(--ff-b);">configure your API key</button> to run live.</p>
+    </div>
+
+    <!-- DEMO 1: JIRA TICKET -->
+    <div class="demo" id="d1">
+      <div class="demo-head" onclick="toggle('d1')">
+        <div class="demo-head-l">
+          <span class="demo-num">01</span>
+          <div>
+            <div class="demo-title">Intake to Jira</div>
+            <div class="demo-sub">Paste a raw request. Get a structured Jira ticket with acceptance criteria and open questions — including the things the requestor forgot to mention.</div>
+          </div>
+        </div>
+        <span class="demo-arrow" id="d1-arr">+</span>
+      </div>
+      <div class="demo-body" id="d1-body">
+        <div class="demo-form">
+          <div class="api-notice" id="d1-notice">No API key configured — showing example output. <button onclick="openModal()" style="background:none;border:none;color:var(--accent-dk);cursor:pointer;font-family:var(--ff-b);font-size:13px;padding:0;text-decoration:underline;">Add key to run live →</button></div>
+          <div class="form-row">
+            <label>Raw request</label>
+            <textarea id="d1-req" rows="5">Hi team, we need to look at updating the on-demand metadata feed to include additional genre taxonomy fields. Sports rights have flagged this as important for the Q3 platform refresh. Not sure exactly what fields are needed but it's coming from above.</textarea>
+          </div>
+          <div class="form-row">
+            <label>System / product area (optional)</label>
+            <input type="text" id="d1-sys" value="On-demand metadata pipeline">
+          </div>
+          <button class="run-btn" onclick="runD1(this)">Generate Jira ticket</button>
+        </div>
+        <div class="demo-out show" id="d1-out">
+          <div class="out-bar">
+            <span class="out-label">Output</span>
+            <button class="copy-btn" onclick="copyOut('d1-content', this)">Copy</button>
+          </div>
+          <div class="out-content" id="d1-content">SUMMARY
+Update on-demand metadata feed — genre taxonomy expansion
+
+TYPE: Enhancement  |  PRIORITY: High  |  AFFECTS: Metadata / On-demand pipeline
+LABEL: Q3 Platform Refresh
+
+DESCRIPTION
+The on-demand metadata feed requires expansion to support an additional genre
+taxonomy structure, flagged by the Sports Rights team for the Q3 platform refresh.
+Current metadata fields do not include the required taxonomy depth for the
+planned platform display requirements.
+
+ACCEPTANCE CRITERIA
+1. Genre taxonomy fields added to the metadata feed specification
+2. New fields validated against Sports Rights taxonomy requirements
+3. Feed updated and smoke-tested in Dev/QA environment
+4. No disruption to existing downstream metadata consumers
+5. UAT sign-off obtained from Sports Rights stakeholders
+6. CAB change raised and approved before production deployment
+
+INFORMATION GAPS — resolve before starting
+• Exact taxonomy fields required (confirm with Sports Rights)
+• Source of taxonomy data — existing reference or new data set?
+• Downstream systems consuming this feed — full impact assessment needed
+• Front-end display requirements for new fields (confirm with UX / Front-end)
+
+OPEN QUESTIONS
+1. What is the confirmed Q3 delivery date? [Sports Rights / Product Lead]
+2. Is this additive only, or does it require changes to existing fields? [Sports Rights]
+3. Are there dependent systems that also need updating? [Architecture / Engineering]
+4. Has a data model for the new taxonomy been agreed? [Data / Architecture]</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO 2: CONFIG DOC -->
+    <div class="demo" id="d2">
+      <div class="demo-head" onclick="toggle('d2')">
+        <div class="demo-head-l">
+          <span class="demo-num">02</span>
+          <div>
+            <div class="demo-title">Configuration document</div>
+            <div class="demo-sub">Upload screenshots from your UAT session. Get a numbered step-by-step configuration document — exactly what you did, in order, with field names and values — ready to hand to the support team for production deployment.</div>
+          </div>
+        </div>
+        <span class="demo-arrow" id="d2-arr">+</span>
+      </div>
+      <div class="demo-body" id="d2-body">
+        <div class="demo-form">
+          <div class="api-notice" id="d2-notice">No API key configured — showing example output. <button onclick="openModal()" style="background:none;border:none;color:var(--accent-dk);cursor:pointer;font-family:var(--ff-b);font-size:13px;padding:0;text-decoration:underline;">Add key to run live →</button></div>
+          <div class="form-row">
+            <label>Screenshots from your UAT session</label>
+            <div class="upload-zone" id="d2-dropzone"
+                 onclick="document.getElementById('d2-files').click()"
+                 ondragover="event.preventDefault();this.classList.add('dragover')"
+                 ondragleave="this.classList.remove('dragover')"
+                 ondrop="handleDrop(event)">
+              <input type="file" id="d2-files" accept="image/*" multiple style="display:none" onchange="handleFileInput(this.files)">
+              <p><strong>Click to upload</strong> or drag screenshots here</p>
+              <p>PNG or JPG · Upload in the order the steps were performed</p>
+              <div class="preview-strip" id="d2-previews"></div>
+              <div class="upload-count" id="d2-count"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Additional context (optional)</label>
+            <input type="text" id="d2-context" placeholder="e.g. change reference, system name, or anything not visible in the screenshots...">
+          </div>
+          <button class="run-btn" onclick="runD2(this)">Generate config doc</button>
+        </div>
+        <div class="demo-out show" id="d2-out">
+          <div class="out-bar">
+            <span class="out-label">Output — example from 4 screenshots</span>
+            <button class="copy-btn" onclick="copyOut('d2-content', this)">Copy</button>
+          </div>
+          <div class="out-content" id="d2-content">CONFIGURATION DOCUMENT
+System: MediaHub Admin — VOD Configuration
+Environment: Production (replicate from UAT)
+Generated from: UAT screen recording (4 screenshots)
+Change ref: CFG-2024-0847
+Prepared by: Product Solutions  |  Date: [Date]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHANGE OVERVIEW
+Update the Genre Taxonomy Version from v1.2 to v2.0 within the VOD
+Configuration Metadata settings. The change affects all new ingest
+jobs after deployment. No other fields are modified.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP-BY-STEP CONFIGURATION
+
+Step 1  Log in to MediaHub Admin. Confirm the environment indicator
+        in the top-right reads Production before proceeding.
+
+Step 2  In the left-hand navigation panel, expand VOD Configuration
+        and select Metadata. The page title should read:
+        "VOD Configuration — Metadata".
+
+        Confirm the Genre Taxonomy Settings tile shows the current
+        value as v1.2 and the badge reads "Pending update".
+        [Screenshot 01]
+
+Step 3  Scroll to the Genre Taxonomy Settings section. Click into
+        the Genre Taxonomy Version field. The field border will
+        turn blue and a tooltip will confirm the edit target.
+
+        Expected tooltip text: "Click to edit — update to v2.0"
+        Expected warning text: "Scheduled update: v1.2 → v2.0"
+        [Screenshot 02]
+
+Step 4  Clear the current value (v1.2) and type: v2.0
+
+        Do not modify any other fields. The Taxonomy Release Date
+        field will auto-populate to 2024-09-01 — this is expected.
+
+        Confirm the change summary banner reads:
+        "1 pending change: Genre Taxonomy Version will be updated
+        from v1.2 to v2.0"
+        [Screenshot 03]
+
+Step 5  Click Save changes. Do not navigate away until the
+        confirmation banner appears.
+
+Step 6  Verify the success banner reads:
+        "Configuration saved successfully"
+        Reference number should read: CFG-2024-0847
+
+        Confirm the Genre Taxonomy Version field displays v2.0
+        in green. Check the audit trail shows:
+        "Genre Taxonomy Version updated from v1.2 to v2.0"
+        with the correct timestamp.
+        [Screenshot 04]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VERIFICATION
+After saving, confirm all of the following:
+  • Genre Taxonomy Version field displays v2.0 (green)
+  • Taxonomy Release Date shows 2024-09-01
+  • Audit trail entry present with correct timestamp
+  • Success banner shows reference CFG-2024-0847
+  • No other fields have changed values
+
+ROLLBACK
+To revert: follow Steps 2–5 and set Genre Taxonomy Version back
+to v1.2. The Taxonomy Release Date will auto-revert to 2024-03-15.
+
+SIGN-OFF REQUIRED
+  Product Solutions:  _________________
+  Support Team:       _________________
+  CAB Approval:       _________________</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO 3: COMMS GENERATOR -->
+    <div class="demo" id="d3">
+      <div class="demo-head" onclick="toggle('d3')">
+        <div class="demo-head-l">
+          <span class="demo-num">03</span>
+          <div>
+            <div class="demo-title">Comms generator</div>
+            <div class="demo-sub">Select who you are writing to. Get a message calibrated specifically for them — their level, their context, and their known preferences.</div>
+          </div>
+        </div>
+        <span class="demo-arrow" id="d3-arr">+</span>
+      </div>
+      <div class="demo-body" id="d3-body">
+        <div class="demo-form">
+          <div class="api-notice" id="d3-notice">No API key configured — showing example output. <button onclick="openModal()" style="background:none;border:none;color:var(--accent-dk);cursor:pointer;font-family:var(--ff-b);font-size:13px;padding:0;text-decoration:underline;">Add key to run live →</button></div>
+          <div class="form-row">
+            <label>Who are you writing to?</label>
+            <select id="d3-persona" onchange="updatePersonaCard()">
+              <option value="director">Director</option>
+              <option value="exec">Senior Executive</option>
+              <option value="requestor">Urgent Requestor</option>
+              <option value="technical">Technical Counterpart</option>
+              <option value="crossbiz">Cross-Business Stakeholder</option>
+            </select>
+            <div class="persona-card" id="d3-persona-card"></div>
+          </div>
+          <div class="form-2col">
+            <div class="form-row">
+              <label>Project</label>
+              <input type="text" id="d3-proj" value="VOD metadata — genre taxonomy update">
+            </div>
+            <div class="form-row">
+              <label>Status</label>
+              <select id="d3-status">
+                <option>On track</option>
+                <option selected>At risk</option>
+                <option>Blocked</option>
+                <option>Complete</option>
+                <option>On hold</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>What has happened</label>
+            <textarea id="d3-update" rows="3">Development is complete and the config doc has been signed off. UAT has slipped — Sports Rights are unavailable this week due to a live rights negotiation.</textarea>
+          </div>
+          <div class="form-row">
+            <label>Next steps</label>
+            <textarea id="d3-next" rows="2">UAT rescheduled for Tuesday. If it passes, CAB submission same week. Production deployment targeting end of month.</textarea>
+          </div>
+          <button class="run-btn" onclick="runD3(this)">Generate comms</button>
+        </div>
+        <div class="demo-out show" id="d3-out">
+          <div class="out-bar">
+            <span class="out-label" id="d3-out-label">Output — Director</span>
+            <button class="copy-btn" onclick="copyOut('d3-content', this)">Copy</button>
+          </div>
+          <div class="out-content" id="d3-content">VOD metadata genre taxonomy — at risk, on track for end of month.
+
+Development is complete and the configuration document has been signed off
+by both teams. UAT has slipped by one week — Sports Rights were unavailable
+this week due to a live rights negotiation, which was outside our control.
+UAT is rescheduled for Tuesday.
+
+This project sits under Q3 platform infrastructure on the roadmap. End-of-
+month production deployment remains achievable if UAT passes Tuesday and CAB
+approves in the same week. There is no further slack in the timeline.
+
+Ask: can you confirm whether a CAB slot for the week of [date] is already
+reserved, or whether we need to request one?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEMO 4: CONFLUENCE AUDIT -->
+    <div class="demo" id="d4">
+      <div class="demo-head" onclick="toggle('d4')">
+        <div class="demo-head-l">
+          <span class="demo-num">04</span>
+          <div>
+            <div class="demo-title">Confluence audit</div>
+            <div class="demo-sub">Paste a dump of existing page titles and notes. Get back a proposed clean structure — what to keep, consolidate, archive, fix, and create. A Confluence shake-up without the three-month project.</div>
+          </div>
+        </div>
+        <span class="demo-arrow" id="d4-arr">+</span>
+      </div>
+      <div class="demo-body" id="d4-body">
+        <div class="demo-form">
+          <div class="api-notice" id="d4-notice">No API key configured — showing example output. <button onclick="openModal()" style="background:none;border:none;color:var(--accent-dk);cursor:pointer;font-family:var(--ff-b);font-size:13px;padding:0;text-decoration:underline;">Add key to run live →</button></div>
+          <div class="form-row">
+            <label>Existing page titles and notes (paste freely)</label>
+            <textarea id="d4-pages" rows="9">Product Solutions Home
+Team Overview (last updated 2021)
+The Migration - overview
+The Migration - runbook [LINK BROKEN]
+The Migration - post-migration tasks (in progress?)
+EPG System - how it works
+EPG System - new EPG notes
+EPG System - EPG v2 stuff
+Rights Management overview
+Rights Management - see runbook (link broken)
+How to raise a change request
+How to raise a change request (updated)
+How to raise a change request FINAL
+CAB process
+CAB process 2023
+Useful links
+Useful links (old)
+Onboarding - new starters
+Onboarding checklist [empty]
+Meeting notes Q2 2022 [12 pages]
+Meeting notes Q3 2022 [18 pages]
+Weekly standup notes [34 pages]</textarea>
+          </div>
+          <div class="form-row">
+            <label>Target categories (optional)</label>
+            <input type="text" id="d4-cats" value="Processes, Systems, Projects, Team">
+          </div>
+          <button class="run-btn" onclick="runD4(this)">Audit and restructure</button>
+        </div>
+        <div class="demo-out show" id="d4-out">
+          <div class="out-bar">
+            <span class="out-label">Output</span>
+            <button class="copy-btn" onclick="copyOut('d4-content', this)">Copy</button>
+          </div>
+          <div class="out-content" id="d4-content">CONFLUENCE AUDIT — Product Solutions
+Proposed structure  |  Categories: Processes · Systems · Projects · Team
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROPOSED STRUCTURE
+
+  Product Solutions Home  (keep — refresh content and links)
+  │
+  ├── Processes
+  │     ├── How to raise a change request    ← consolidate 3 versions into 1
+  │     ├── CAB process                      ← keep 2023 version, archive older
+  │     └── Deployment pipeline overview     ← MISSING · create this
+  │
+  ├── Systems
+  │     ├── EPG — system overview            ← consolidate 3 EPG pages into 1
+  │     └── Rights Management               ← fix or recreate broken runbook
+  │
+  ├── Projects
+  │     └── [Archive] The Migration         ← mark complete, move all pages here
+  │
+  └── Team
+        ├── Onboarding                       ← merge guide + checklist, fill gaps
+        ├── Useful links                     ← consolidate 2 versions into 1
+        └── [Archive] Meeting notes          ← move all standup/notes here by quarter
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIONS REQUIRED
+
+  CONSOLIDATE  (reduce 22 pages to approximately 9 active pages)
+  • "How to raise a change request" — 3 versions exist, keep FINAL, redirect others
+  • "EPG System" — 3 pages with overlapping content, merge into one
+  • "CAB process" — 2 versions, keep 2023 edition, archive the original
+  • "Useful links" — 2 versions, merge into one and remove dead links
+
+  FIX
+  • "The Migration — runbook" — link broken, confirm if needed or archive the reference
+  • "Rights Management — runbook" — link broken, recreate from source or remove reference
+
+  ARCHIVE  (move to /Archive — do not delete)
+  • All Migration pages — project is complete, retain for reference
+  • Meeting notes Q2 and Q3 2022 — no longer active
+  • 34 pages of standup notes — archive by quarter in /Archive/Standups
+
+  CREATE  (identified gaps — no page currently exists)
+  • Deployment pipeline overview — no single source of truth for the end-to-end process
+  • Onboarding checklist — page exists but is empty, populate with actual steps
+
+  REVIEW NEEDED
+  • "Team Overview (last updated 2021)" — almost certainly out of date
+  • "Onboarding - new starters" — verify content reflects current tools and process</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TEAM -->
+<section class="team-sec" id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The team.</h2>
+      <p>Small, reactive, and unreasonably familiar with the CAB process.</p>
+    </div>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <svg class="team-mark" width="44" height="44" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="26" stroke="#D85A30" stroke-width="2" fill="none"/>
+          <text x="30" y="35.5" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#1A1A18">MS</text>
+        </svg>
+        <div>
+          <div class="team-name">Mara Singh</div>
+          <div class="team-role">Product Lead</div>
+          <div class="team-bio">"Convinced that the right AI use case is worth at least one fewer status update chase per week."</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <svg class="team-mark" width="44" height="44" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="26" stroke="#D85A30" stroke-width="2" fill="none"/>
+          <text x="30" y="35.5" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#1A1A18">JA</text>
+        </svg>
+        <div>
+          <div class="team-name">Joe Adeyemi</div>
+          <div class="team-role">Senior Product Manager</div>
+          <div class="team-bio">"Has produced more configuration documents than he would like to count. This project started as catharsis."</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <svg class="team-mark" width="44" height="44" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="26" stroke="#D85A30" stroke-width="2" fill="none"/>
+          <text x="30" y="35.5" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#1A1A18">PO</text>
+        </svg>
+        <div>
+          <div class="team-name">Priya Okafor</div>
+          <div class="team-role">Product Analyst</div>
+          <div class="team-bio">"Monitors the Confluence pages so you don't have to. Reports: it is not good."</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <svg class="team-mark" width="44" height="44" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="26" stroke="#D85A30" stroke-width="2" fill="none"/>
+          <text x="30" y="35.5" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#1A1A18">FM</text>
+        </svg>
+        <div>
+          <div class="team-name">Finn McCarthy</div>
+          <div class="team-role">Associate Product Manager</div>
+          <div class="team-bio">"Six months in. Now familiar with all five tools a single change request touches."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="thinking">
+  <div class="wrap">
+    <div class="phil-inner">
+      <h2>The thinking behind it.</h2>
+      <p>Product teams in sustainment mode have a particular problem. <strong>The work that requires the most expertise gets the least time</strong>, because the scaffolding around it — the admin, the documentation, the communication — expands to fill whatever space is available.</p>
+      <div class="phil-pull">
+        <p>The right question was never "what can AI do?" — it was "where are we losing time we shouldn't be losing?"</p>
+      </div>
+      <p>These tools don't replace the thinking. They replace the <strong>blank page</strong>. The PM still applies judgement, context, and accountability. The toolkit handles the parts that are important but not differentiating: the first draft, the formatting, the calibration, the structure.</p>
+      <p>The starting point was the workflow, not the technology. Each module exists because it addresses something that recurs constantly and costs time disproportionate to its actual difficulty.</p>
+      <p>That's what Works As Intended is. Not a transformation. Not a platform. <strong>A more honest answer to a question product teams have been asking for a long time.</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="foot-brand">Works As Intended</span>
+  <span class="foot-note">It's not a bug, it's a feature.</span>
+</footer>
+
+<!-- API KEY MODAL -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <h3>API configuration</h3>
+    <p>Enter your Anthropic API key to run the demos live. Your key stays in memory only — it is never stored or sent anywhere except the Anthropic API directly.</p>
+    <input type="password" id="apiInput" placeholder="sk-ant-..." onkeydown="if(event.key==='Enter')saveKey()">
+    <div class="modal-btns">
+      <button class="modal-save" onclick="saveKey()">Save and enable</button>
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let KEY = '';
+
+function openModal() { document.getElementById('overlay').classList.add('open'); setTimeout(()=>document.getElementById('apiInput').focus(),50); }
+function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+function overlayClick(e) { if(e.target===document.getElementById('overlay')) closeModal(); }
+
+updatePersonaCard();
+
+function saveKey() {
+  const k = document.getElementById('apiInput').value.trim();
+  if (k) {
+    KEY = k;
+    const btn = document.getElementById('apiBtn');
+    btn.textContent = 'API key active ✓';
+    btn.classList.add('active');
+    ['d1','d2','d3','d4'].forEach(id => {
+      const n = document.getElementById(id+'-notice');
+      if(n) n.classList.remove('show');
+    });
+  }
+  closeModal();
+}
+
+function toggle(id) {
+  const body = document.getElementById(id+'-body');
+  const arr  = document.getElementById(id+'-arr');
+  const open = body.classList.toggle('open');
+  arr.classList.toggle('open', open);
+  if (open && !KEY) {
+    const n = document.getElementById(id+'-notice');
+    if(n) n.classList.add('show');
+  }
+}
+
+function copyOut(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(()=>{ btn.textContent = orig; }, 2000);
+  });
+}
+
+async function callClaude(system, user, runBtn) {
+  if (!KEY) { openModal(); return null; }
+  runBtn.disabled = true;
+  const orig = runBtn.textContent;
+  runBtn.textContent = 'Generating…';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1200, system, messages:[{role:'user',content:user}] })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.content[0].text;
+  } catch(e) {
+    alert('Error: ' + e.message);
+    return null;
+  } finally {
+    runBtn.disabled = false;
+    runBtn.textContent = orig;
+  }
+}
+
+function showOut(outId, contentId, text) {
+  document.getElementById(contentId).textContent = text;
+  document.getElementById(outId).classList.add('show');
+}
+
+async function runD1(btn) {
+  const req = document.getElementById('d1-req').value;
+  const sys = document.getElementById('d1-sys').value;
+  const SP = `You are a senior product manager at a large media organisation (broadcasting and streaming). Turn a raw business request into a structured Jira ticket using this exact format:
+
+SUMMARY
+[one-line ticket title]
+
+TYPE: [Enhancement/Bug/New Feature/Task]  |  PRIORITY: [Critical/High/Medium/Low]  |  AFFECTS: [system or team]
+LABEL: [relevant label if any]
+
+DESCRIPTION
+[2-3 sentences of context]
+
+ACCEPTANCE CRITERIA
+[numbered list of testable criteria]
+
+INFORMATION GAPS — resolve before starting
+[bullet list of missing information]
+
+OPEN QUESTIONS
+[numbered list, each with suggested owner in brackets]
+
+Be specific and direct. No filler language.`;
+  const text = await callClaude(SP, `System: ${sys}\n\nRequest: "${req}"`, btn);
+  if (text) showOut('d1-out','d1-content', text);
+}
+
+let d2Images = [];
+
+function handleFileInput(files) {
+  d2Images = new Array(files.length);
+  const strip = document.getElementById('d2-previews');
+  const count = document.getElementById('d2-count');
+  strip.innerHTML = '';
+  Array.from(files).forEach((file, i) => {
+    const reader = new FileReader();
+    reader.onload = e => { d2Images[i] = { base64: e.target.result.split(',')[1], type: file.type }; };
+    reader.readAsDataURL(file);
+    const img = document.createElement('img');
+    img.className = 'preview-thumb';
+    img.src = URL.createObjectURL(file);
+    strip.appendChild(img);
+  });
+  count.textContent = `${files.length} screenshot${files.length !== 1 ? 's' : ''} ready`;
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('d2-dropzone').classList.remove('dragover');
+  handleFileInput(e.dataTransfer.files);
+}
+
+async function runD2(btn) {
+  const images = d2Images.filter(Boolean);
+  if (!images.length) { alert('Please upload at least one screenshot first.'); return; }
+  const context = document.getElementById('d2-context').value;
+  const SP = `You are a senior product manager at a large media organisation. You have been given screenshots from a UAT configuration session, uploaded in the order the steps were performed.
+
+Generate a deployment-ready configuration document that a support team can follow exactly to replicate these steps in production.
+
+Requirements:
+- Number every step clearly
+- Reference the screenshot number in brackets for any step that involves a visible action e.g. [Screenshot 01]
+- Include the exact field names, button labels, menu paths, and values visible in each screenshot
+- Where a value is being changed, state clearly: old value → new value
+- Do not invent steps that are not visible in the screenshots
+
+Use this exact format:
+
+CONFIGURATION DOCUMENT
+System: [Identify from screenshots]
+Environment: Production (replicate from UAT)
+Generated from: UAT screen recording
+Change ref: [If visible in screenshots, otherwise leave blank]
+Prepared by: Product Solutions  |  Date: [Date]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHANGE OVERVIEW
+[One paragraph summary of what is being configured and why, based on what the screenshots show]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP-BY-STEP CONFIGURATION
+
+[Each step clearly numbered. Include screenshot reference where relevant. Be specific about navigation paths, field names, and values.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VERIFICATION
+[Bullet list of what to confirm after all steps are complete]
+
+ROLLBACK
+[How to revert if needed]
+
+SIGN-OFF REQUIRED
+  Product Solutions:  _________________
+  Support Team:       _________________
+  CAB Approval:       _________________`;
+
+  const userContent = [
+    ...images.map((img, i) => ({
+      type: 'image',
+      source: { type: 'base64', media_type: img.type, data: img.base64 }
+    })),
+    { type: 'text', text: `These ${images.length} screenshots show a UAT configuration session in sequence.${context ? ' Additional context: ' + context : ''} Generate the configuration document.` }
+  ];
+
+  const text = await callClaudeVision(SP, userContent, btn);
+  if (text) showOut('d2-out', 'd2-content', text);
+}
+
+async function callClaudeVision(system, contentArray, runBtn) {
+  if (!KEY) { openModal(); return null; }
+  runBtn.disabled = true;
+  const orig = runBtn.textContent;
+  runBtn.textContent = 'Generating…';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, system, messages: [{ role: 'user', content: contentArray }] })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.content[0].text;
+  } catch(e) { alert('Error: ' + e.message); return null; }
+  finally { runBtn.disabled = false; runBtn.textContent = orig; }
+}
+
+const PERSONAS = {
+  director: {
+    name: 'Director',
+    role: 'Chain of command · Understands the detail · Strategic and risk-aware · Reads everything',
+    quirks: [
+      'Forwards updates to the Senior Exec without editing — the first sentence must work completely standalone',
+      'Expects every update to reference where the project sits on the roadmap'
+    ],
+    system: `You are a senior PM at a large media organisation writing a status update for your Director.
+
+The Director understands the technical and operational detail of most projects. They are strategic and risk-aware, and they read every word.
+
+Two things are important about this Director:
+— They forward updates to the Senior Executive without editing, so your opening sentence must work as a completely standalone summary.
+— They expect every update to reference where this project sits on the roadmap.
+
+Write a concise, professional update. 2–3 short paragraphs. Lead with a standalone first sentence covering status and key implication. Include a natural roadmap reference. End with next steps or a clear ask. Output the message body only.`
+  },
+  exec: {
+    name: 'Senior Executive',
+    role: 'Chain of command · Highest level · Pushes for progress · Reads the first two sentences',
+    quirks: [
+      'Prefers slide format over prose — structure output as deck-ready bullet points',
+      'Will not engage with an update that lacks a clear recommended action or explicit ask'
+    ],
+    system: `You are a senior PM writing a status update for a Senior Executive.
+
+The Senior Executive wants only the highest-level picture. They push for progress and have little patience for operational detail. They typically read only the first two sentences of any written update.
+
+Two things are important about this executive:
+— They prefer information structured as slide/deck bullet points, not as prose paragraphs.
+— They will not engage with an update that does not end with a clear recommended action or explicit ask.
+
+Format: 4–6 bullet points maximum. Status → key fact → risk or dependency if relevant → recommended action. Nothing more. Output bullet points only, no preamble.`
+  },
+  requestor: {
+    name: 'Urgent Requestor',
+    role: 'Business user · Impatient · Reads first and last sentences · Responds to warmth and clarity',
+    quirks: [
+      'Put the most important information in the first and last sentences',
+      'No process language — acknowledge urgency directly, without being defensive'
+    ],
+    system: `You are a senior PM responding to or updating a business user who submitted an urgent request. They are impatient and do not always read full messages.
+
+Write a response that acknowledges their situation without being apologetic or defensive, gives a clear and specific commitment on next steps with a timeframe where possible, and puts the most important information in the first and last sentences.
+
+No jargon. No process language. Friendly but direct. Keep it short. Output the message body only.`
+  },
+  technical: {
+    name: 'Technical Counterpart',
+    role: 'Engineering or architecture · Wants specifics · Will probe for gaps · Values precision over polish',
+    quirks: [
+      'Will push back on any vague statement — be specific and technically precise',
+      'Direct is better than diplomatic; do not over-explain the obvious'
+    ],
+    system: `You are a senior PM updating a technical counterpart — an engineer or architect deeply familiar with the systems involved.
+
+They want specifics. They will probe any vague statement and notice anything left unstated. They value directness and precision over diplomatic softening. They do not need business context explained to them.
+
+Write a technically precise, structured update. Include relevant technical detail. Be direct about risks, open questions, or dependencies. Flag anything that needs their input. Do not over-explain or soften. Output the message body only.`
+  },
+  crossbiz: {
+    name: 'Cross-Business Stakeholder',
+    role: 'Different part of the organisation · No media or tech background · Needs plain language and context',
+    quirks: [
+      'Provide enough context to understand the conclusion before you deliver it',
+      'No acronyms or internal terminology — write as if they know nothing about your systems'
+    ],
+    system: `You are a senior PM at a large media organisation updating a stakeholder from a completely different part of the business. They have no knowledge of your product landscape, internal tools, systems, or terminology.
+
+Write an update that provides just enough context for them to understand the conclusion before you deliver it, uses plain English throughout with no acronyms or internal terms, is friendly and clear without being condescending, and ends with a clear statement of what — if anything — you need from them. Output the message body only.`
+  }
+};
+
+function updatePersonaCard() {
+  const key = document.getElementById('d3-persona').value;
+  const p = PERSONAS[key];
+  const card = document.getElementById('d3-persona-card');
+  card.innerHTML = `<div class="pc-name">${p.name}</div><div class="pc-role">${p.role}</div>${p.quirks.map(q => `<div class="pc-quirk">${q}</div>`).join('')}`;
+  const label = document.getElementById('d3-out-label');
+  if (label) label.textContent = `Output — ${p.name}`;
+}
+
+async function runD3(btn) {
+  const key    = document.getElementById('d3-persona').value;
+  const proj   = document.getElementById('d3-proj').value;
+  const status = document.getElementById('d3-status').value;
+  const update = document.getElementById('d3-update').value;
+  const next   = document.getElementById('d3-next').value;
+  const p = PERSONAS[key];
+  document.getElementById('d3-out-label').textContent = `Output — ${p.name}`;
+  const text = await callClaude(p.system, `Project: ${proj}\nStatus: ${status}\nWhat happened: ${update}\nNext steps: ${next}`, btn);
+  if (text) showOut('d3-out','d3-content', text);
+}
+
+async function runD4(btn) {
+  const pages = document.getElementById('d4-pages').value;
+  const cats  = document.getElementById('d4-cats').value;
+  const SP = `You are a senior product manager auditing a disorganised Confluence space. Produce a structured audit using this exact format:
+
+CONFLUENCE AUDIT — [team name]
+Proposed structure  |  Categories: [list them]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROPOSED STRUCTURE
+[ASCII tree diagram showing the clean new structure with short inline notes]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIONS REQUIRED
+
+  CONSOLIDATE
+  [bullet list of pages to merge, with brief instruction]
+
+  FIX
+  [bullet list of broken links or errors to resolve]
+
+  ARCHIVE  (move to /Archive — do not delete)
+  [bullet list of pages to archive]
+
+  CREATE  (identified gaps)
+  [bullet list of missing pages that should exist]
+
+  REVIEW NEEDED
+  [bullet list of pages requiring human assessment]
+
+Be specific and practical.`;
+  const text = await callClaude(SP, `Target categories: ${cats}\n\nExisting pages:\n${pages}`, btn);
+  if (text) showOut('d4-out','d4-content', text);
+}
+</script>
+</body>
+</html>
